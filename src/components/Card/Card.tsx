@@ -1,13 +1,17 @@
 import style from './Card.module.scss';
 import like from '../../assets/heart.png';
 import avatar from '../../assets/avatar.png';
+import { Link } from 'react-router-dom';
 
 const Card = () => {
   return (
     <div className={style.card}>
       <div className={style.card__content}>
         <div className={style.header}>
-          <h2 className={style.header__title}>Some article title</h2>
+          <Link to='/articles/:id'>
+            <h2 className={style.header__title}>Some article title</h2>
+          </Link>
+
           <button className={style.header__like}>
             <img src={like} />
             12

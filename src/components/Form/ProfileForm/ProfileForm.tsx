@@ -56,7 +56,7 @@ const ProfileForm = () => {
         <Form.Item>
           <Button
             type='primary'
-            disabled={status === 'loading'}
+            //disabled={status === 'loading'}
             htmlType='submit'
             className='login-form-button'
             style={{ width: '100%', height: '40px', background: ' #1890FF' }}

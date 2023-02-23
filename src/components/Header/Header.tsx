@@ -4,10 +4,12 @@ import style from './Header.module.scss';
 const Header = () => {
   return (
     <header className={style.header}>
-      <h4>RealWorld Blog</h4>
+      <Link to='/articles'>
+        <h4>RealWorld Blog</h4>
+      </Link>
       <div className={style.header__link}>
-        <Link to='/sign-in'>Sign In</Link>
-        <Link to='/login'>Sign Up</Link>
+        <Link to='sign-in'>Sign In</Link>
+        <Link to='login'>Sign Up</Link>
       </div>
     </header>
   );

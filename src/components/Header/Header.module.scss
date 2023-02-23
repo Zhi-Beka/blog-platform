@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+  height: var(--navbar-height);
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__link {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  &__link > a:last-child {
+    color: var(--success-color);
+    margin-left: 20px;
+  }
+}

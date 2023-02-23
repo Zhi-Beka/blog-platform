@@ -1,0 +1,23 @@
+.form {
+  margin: 50px auto;
+  max-width: 400px;
+  padding: 25px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .signin {
+    color: var(--info-color);
+  }
+
+  .label {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  p {
+    text-align: center;
+  }
+}

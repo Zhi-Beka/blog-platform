@@ -1,4 +1,5 @@
-import { createBrowserRouter } from 'react-router-dom';
+import path from 'path';
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import App from '../App';
 import Article from '../components/Article/Article';
 import ArticleList from '../components/ArticleList';
@@ -14,14 +15,16 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        element: <ArticleList />,
+        index: true,
+      },
+      {
         path: 'articles',
         element: <ArticleList />,
-        children: [
-          {
-            path: 'articles/:id',
-            element: <Article />,
-          },
-        ],
+      },
+      {
+        path: 'articles/:id',
+        element: <Article />,
       },
 
       {

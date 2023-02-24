@@ -1,13 +1,33 @@
-interface IUser {
-  email: string;
-  token: string;
+//interface IUsers {
+//  email: string;
+//  token: string;
+//  username: string;
+//  bio: string;
+//  image: string;
+//}
+
+export interface IAuthor {
   username: string;
-  bio: string;
   image: string;
+  following: boolean;
+}
+
+export interface IUsers {
+  author: IAuthor;
+  body?: string;
+  createdAt: string;
+  description: string;
+  favorited?: boolean;
+  favoritesCount: number;
+  slug?: string;
+  tagList: string[];
+  title: string;
+  updatedAt?: string;
 }
 
 export interface IState {
   loading: boolean;
-  users: IUser[];
+  users: IUsers[];
+  articleCount: number;
   error: boolean | string;
 }

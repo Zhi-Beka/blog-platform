@@ -1,7 +1,8 @@
 .card {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  height: var(--card-height);
+  //height: var(--card-height);
+  height: auto;
   background-color: white;
   padding: 20px;
   box-shadow: rgba(41, 41, 42, 0.2) 0 7px 29px 0;
@@ -46,6 +47,15 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
+    .articleFull {
+      color: grey;
+    }
+  }
+
+  .body {
+    margin-top: 25px;
+    min-height: calc(100vh - 280px);
+    word-break: break-all;
   }
 
   .avatar {
@@ -71,4 +81,13 @@
       }
     }
   }
+}
+
+.cardFull {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  height: auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: rgba(41, 41, 42, 0.2) 0 7px 29px 0;
 }

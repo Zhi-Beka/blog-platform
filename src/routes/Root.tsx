@@ -1,12 +1,6 @@
-import path from 'path';
-import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import Article from '../components/Article/Article';
-import ArticleList from '../components/ArticleList';
-import ErrorPage from '../components/ErrorPage/ErrorPage';
-import LoginForm from '../components/Form/LoginForm/LoginForm';
-import ProfileForm from '../components/Form/ProfileForm/ProfileForm';
-import RegisterForm from '../components/Form/RegisterForm/RegisterForm';
+import { Article, ArticleList, ErrorPage, LoginForm, ProfileForm, RegisterForm } from '../components';
 
 export const router = createBrowserRouter([
   {

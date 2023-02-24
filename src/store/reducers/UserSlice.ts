@@ -6,6 +6,7 @@ import { fetchUsers } from '../action-creators/fetchUsers';
 const initialState: IState = {
   loading: true,
   users: [],
+  articleCount: 0,
   error: false,
 };
 
@@ -17,9 +18,10 @@ export const UserSlice = createSlice({
     [fetchUsers.pending.type]: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    [fetchUsers.fulfilled.type]: (state, action: PayloadAction<any[]>) => {
+    [fetchUsers.fulfilled.type]: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.users = action.payload;
+      state.users = action.payload.articles;
+      state.articleCount = action.payload.articlesCount;
       state.error = '';
     },
     [fetchUsers.rejected.type]: (state, action: PayloadAction<string>) => {

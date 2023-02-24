@@ -6,12 +6,12 @@ export interface IAuthor {
 
 export interface IUser {
   author: IAuthor;
-  body?: string;
+  body: string;
   createdAt: string;
   description: string;
   favorited?: boolean;
   favoritesCount: number;
-  slug?: string;
+  slug: string;
   tagList: string[];
   title: string;
   updatedAt?: string;

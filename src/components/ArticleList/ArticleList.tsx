@@ -1,24 +1,29 @@
 import { Pagination } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../Card';
 import style from './ArticleList.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUsers } from '../../store/action-creators/fetchUsers';
-import { Outlet } from 'react-router';
 
 const ArticleList = () => {
   const users = useAppSelector((state) => state.userReducer.users);
+  const countPage = useAppSelector((state) => state.userReducer.articleCount);
   const dispatch = useAppDispatch();
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
+    dispatch(fetchUsers(page));
+  }, [page]);
+
+  const onChange = (pageCount: number): void => {
+    setPage(pageCount);
+  };
 
   return (
     <>
       <div className={style.list}>
-        {users.slice(0, 5).map((item: any) => {
-          const { createdAt, author, tagList, title, favoritesCount, description, slug } = item;
+        {users.map((item: any) => {
+          const { createdAt, author, tagList, title, favoritesCount, description, slug, body } = item;
 
           return (
             <Card
@@ -30,11 +35,12 @@ const ArticleList = () => {
               favoritesCount={favoritesCount}
               description={description}
               slug={slug}
+              body={body}
             />
           );
         })}
 
-        <Pagination defaultCurrent={1} total={50} />
+        <Pagination current={page} total={countPage} pageSize={5} onChange={onChange} showSizeChanger={false} />
       </div>
     </>
   );

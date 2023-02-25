@@ -43,7 +43,7 @@ const LoginForm = () => {
         </Form.Item>
         <p>
           Do not have an account?{' '}
-          <Link to={'/login'} className={style.signup}>
+          <Link to={'/sign-up'} className={style.signup}>
             Sign Up
           </Link>
         </p>

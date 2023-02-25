@@ -1,8 +1,8 @@
 .card {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  //height: var(--card-height);
-  height: auto;
+  width: 100%;
+  min-height: var(--card-height);
   background-color: white;
   padding: 20px;
   box-shadow: rgba(41, 41, 42, 0.2) 0 7px 29px 0;
@@ -54,8 +54,14 @@
 
   .body {
     margin-top: 25px;
-    min-height: calc(100vh - 280px);
+    min-height: 0;
     word-break: break-all;
+
+    h1 {
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 400;
+    }
   }
 
   .avatar {
@@ -81,13 +87,4 @@
       }
     }
   }
-}
-
-.cardFull {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  height: auto;
-  background-color: white;
-  padding: 20px;
-  box-shadow: rgba(41, 41, 42, 0.2) 0 7px 29px 0;
 }

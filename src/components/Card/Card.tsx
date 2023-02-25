@@ -23,6 +23,7 @@ const Card = (props: IUser) => {
       <ReactMarkdown>{body}</ReactMarkdown>
     </div>
   );
+
   return (
     <div className={style.card}>
       <div className={style.card__content}>

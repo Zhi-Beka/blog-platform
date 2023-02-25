@@ -9,7 +9,7 @@ export default function ErrorPage() {
   useEffect(() => {
     setTimeout(() => {
       navigate('/articles');
-    }, 1500);
+    }, 2000);
   }, []);
   return (
     <div id='error-page' className={style.errorBox}>

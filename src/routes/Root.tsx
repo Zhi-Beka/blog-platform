@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: 'login',
+        path: 'sign-up',
         element: <RegisterForm />,
       },
       {
@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         element: <LoginForm />,
       },
       {
-        path: 'edit-profile',
+        path: 'profile',
         element: <ProfileForm />,
       },
     ],

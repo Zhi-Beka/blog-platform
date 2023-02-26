@@ -1,15 +1,38 @@
 import { Button, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import style from './LoginForm.module.scss';
+import { LoginType } from '../../../types/userTypes';
+import { loginUser } from '../../../store/action-creators/authUsers';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const { error, loading, success, userInfo, message } = useAppSelector((state) => state.authReducer);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onSubmit = (data: LoginType) => {
+    const { email, password } = data;
+
+    const userData = { user: { email, password } };
+    dispatch(loginUser(userData));
   };
+  useEffect(() => {
+    if (error) {
+      toast.error(message);
+    }
+    if (success || userInfo) {
+      toast.success('Successfully logined!');
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
+    }
+  }, [userInfo, error, success, message, dispatch, navigate]);
 
   return (
     <div className={style.form}>
-      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onFinish}>
+      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSubmit}>
         <h2 className={style.title}>Sign In</h2>
 
         <span className={style.label}> Email address</span>

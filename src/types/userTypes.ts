@@ -24,3 +24,5 @@ export interface IData {
   confirm: string;
   remember: boolean;
 }
+
+export type LoginType = Pick<IData, 'email' | 'password'>;

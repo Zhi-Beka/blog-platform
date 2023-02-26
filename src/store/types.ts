@@ -1,11 +1,3 @@
-//interface IUsers {
-//  email: string;
-//  token: string;
-//  username: string;
-//  bio: string;
-//  image: string;
-//}
-
 export interface IAuthor {
   username: string;
   image: string;
@@ -30,4 +22,34 @@ export interface IState {
   users: IUsers[];
   articleCount: number;
   error: boolean | string;
+}
+
+export interface INewUser {
+  user: {
+    username: string;
+    email: string;
+    password: string;
+  };
+}
+
+export type UserDataType = {
+  username: string;
+  email: string;
+  token: string;
+};
+
+//export interface IUserSuccess {
+//  email: string;
+//  token: string;
+//  username: string;
+//  bio: string;
+//  image: string;
+//}
+
+export interface IStateRegister {
+  loading: boolean;
+  userInfo: UserDataType | null;
+  error: boolean;
+  message: string;
+  success: boolean;
 }

@@ -1,15 +1,47 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Alert, Button, Checkbox, Form, Input, Spin } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './RegisterForm.module.scss';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { registerUser } from '../../../store/action-creators/authUsers';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import { reset } from '../../../store/reducers/AuthSlice';
+import { IData } from '../../../types/userTypes';
 
 const RegisterForm = () => {
-  const onFinish = () => {
-    console.log('form');
-  };
+  const { error, loading, success, userInfo, message } = useAppSelector((state) => state.authReducer);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  const onSubmit = (data: IData) => {
+    const { username, email, password, confirm } = data;
+    if (password !== confirm) {
+      toast.error('Password does not match!');
+    } else {
+      const userData = { user: { username, email, password } };
+      dispatch(registerUser(userData));
+    }
+  };
+  useEffect(() => {
+    if (error) {
+      toast.error(message);
+    }
+    if (success || userInfo) {
+      navigate('/');
+    }
+    //dispatch(reset());
+  }, [userInfo, error, success, message, navigate, dispatch]);
+
+  if (loading) {
+    return (
+      <Spin tip='Loading...'>
+        <Alert message='Alert message title' type='info' />
+      </Spin>
+    );
+  }
   return (
     <div className={style.form}>
-      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onFinish}>
+      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSubmit}>
         <h2>Create new account</h2>
         <span className={style.label}> Username</span>
         <Form.Item
@@ -18,8 +50,8 @@ const RegisterForm = () => {
           rules={[
             {
               required: true,
-              pattern: /^(?=.{3,})[a-z][a-z0-9]*$/,
-              message: 'Use lowercase English letters and numbers.',
+              pattern: /^(?=.{3,20})[a-z][a-z0-9]*$/,
+              message: 'Please type with lowercase letters',
             },
           ]}
           style={{ marginBottom: '12', height: '40px' }}

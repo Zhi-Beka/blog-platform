@@ -1,10 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import style from './Header.module.scss';
 import avatar from '../../assets/avatar.png';
 import classNames from 'classnames';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { logOutAuth } from '../../store/action-creators/authUsers';
+import { reset } from '../../store/reducers/AuthSlice';
 
 const Header = () => {
-  const login = true;
+  const login = useAppSelector((state) => state.authReducer.success);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const active = classNames({
     [style.active]: login,
   });
@@ -12,6 +17,12 @@ const Header = () => {
     [style.logOut]: login,
     [style.login]: !login,
   });
+
+  const logOutBtn = () => {
+    dispatch(logOutAuth());
+    dispatch(reset());
+    navigate('/');
+  };
   return (
     <header className={style.header}>
       <Link to='/articles'>
@@ -28,10 +39,13 @@ const Header = () => {
             <img src={avatar} />
           </Link>
         )}
+        {login && (
+          <button className={logOut} onClick={logOutBtn}>
+            Log Out
+          </button>
+        )}
 
-        <Link to={login ? 'articles' : 'sign-up'} className={logOut}>
-          {login ? 'Log Out' : 'Sign Up'}
-        </Link>
+        {!login && <Link to='sign-up'>Sign Up</Link>}
       </div>
     </header>
   );

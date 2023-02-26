@@ -16,3 +16,11 @@ export interface IUser {
   title: string;
   updatedAt?: string;
 }
+
+export interface IData {
+  username: string;
+  email: string;
+  password: string;
+  confirm: string;
+  remember: boolean;
+}

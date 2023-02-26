@@ -48,7 +48,7 @@ const ProfileForm = () => {
         <Form.Item
           style={{ marginBottom: '21' }}
           name='image'
-          rules={[{ required: false }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]}
+          rules={[{ required: true }, { type: 'url' }, { type: 'string', min: 6 }]}
         >
           <Input placeholder='Avatar image' style={{ height: '40px' }} />
         </Form.Item>

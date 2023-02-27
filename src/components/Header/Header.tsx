@@ -3,26 +3,30 @@ import style from './Header.module.scss';
 import avatar from '../../assets/avatar.png';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { logOutAuth } from '../../store/action-creators/authUsers';
-import { reset } from '../../store/reducers/AuthSlice';
+import { logOut } from '../../store/slices/AuthSlice/AuthSlice';
+import { toast } from 'react-toastify';
 
 const Header = () => {
-  const login = useAppSelector((state) => state.authReducer.success);
+  const login = localStorage.getItem('isLogged'); //for saving auth header style
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.authReducer);
   const navigate = useNavigate();
   const active = classNames({
     [style.active]: login,
   });
-  const logOut = classNames({
+  const logOutStyle = classNames({
     [style.logOut]: login,
     [style.login]: !login,
   });
 
   const logOutBtn = () => {
-    dispatch(logOutAuth());
-    dispatch(reset());
-    navigate('/');
+    dispatch(logOut());
+    toast.success('You are logged out');
+    setTimeout(() => {
+      navigate('/');
+    }, 500);
   };
+
   return (
     <header className={style.header}>
       <Link to='/articles'>
@@ -35,12 +39,14 @@ const Header = () => {
 
         {login && (
           <Link to='profile' className={style.profile}>
-            John Doe
-            <img src={avatar} />
+            {user?.username}
+            <div className={style.image}>
+              <img src={user ? user.image : avatar} />
+            </div>
           </Link>
         )}
         {login && (
-          <button className={logOut} onClick={logOutBtn}>
+          <button className={logOutStyle} onClick={logOutBtn}>
             Log Out
           </button>
         )}

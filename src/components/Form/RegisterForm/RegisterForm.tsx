@@ -1,36 +1,31 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Alert, Button, Checkbox, Form, Input, Spin } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './RegisterForm.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { registerUser } from '../../../store/action-creators/authUsers';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
-import { reset } from '../../../store/reducers/AuthSlice';
+import { FC, useEffect } from 'react';
 import { IData } from '../../../types/userTypes';
+import { signUpUser } from '../../../store/thunks/AuthThunk/authUsers';
 
-const RegisterForm = () => {
-  const { error, loading, success, userInfo, message } = useAppSelector((state) => state.authReducer);
+const RegisterForm: FC = () => {
+  const { isError, loading, user } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = (data: IData) => {
-    const { username, email, password, confirm } = data;
-    if (password !== confirm) {
-      toast.error('Password does not match!');
-    } else {
-      const userData = { user: { username, email, password } };
-      dispatch(registerUser(userData));
-    }
+  const onSignUp = (data: IData) => {
+    const { username, email, password } = data;
+    const userData = { user: { username, email, password } };
+    dispatch(signUpUser(userData));
   };
+
   useEffect(() => {
-    if (error) {
-      toast.error(message);
-    }
-    if (success || userInfo) {
+    if (isError) toast.error(isError);
+    if (user?.token) {
+      toast.success('You are successfully registered');
       navigate('/');
     }
-    //dispatch(reset());
-  }, [userInfo, error, success, message, navigate, dispatch]);
+  }, [isError, user?.token]);
 
   if (loading) {
     return (
@@ -41,12 +36,12 @@ const RegisterForm = () => {
   }
   return (
     <div className={style.form}>
-      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSubmit}>
+      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSignUp}>
         <h2>Create new account</h2>
         <span className={style.label}> Username</span>
         <Form.Item
           name='username'
-          //initialValue={error && data[0]}
+          //initialValue={error}
           rules={[
             {
               required: true,
@@ -116,7 +111,7 @@ const RegisterForm = () => {
         <Form.Item>
           <Button
             type='primary'
-            disabled={status === 'loading'}
+            disabled={loading}
             htmlType='submit'
             className='login-form-button'
             style={{ width: '100%', height: '40px', background: ' #1890FF' }}

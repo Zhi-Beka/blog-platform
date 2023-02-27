@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react';
 import Card from '../Card';
 import style from './ArticleList.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUsers } from '../../store/action-creators/fetchUsers';
-import { checkToken } from '../../store/reducers/AuthSlice';
+import { fetchUsers } from '../../store/thunks/UsersThunk/fetchUsers';
 
 const ArticleList = () => {
   const users = useAppSelector((state) => state.userReducer.users);
@@ -12,14 +11,10 @@ const ArticleList = () => {
 
   const dispatch = useAppDispatch();
   const [page, setPage] = useState<number>(1);
-  //временный костыль по токену, пока не разберешься с axios!
-  const authToken = localStorage.getItem('token');
+
   useEffect(() => {
-    if (authToken) {
-      dispatch(checkToken());
-    }
     dispatch(fetchUsers(page));
-  }, [page, authToken]);
+  }, [page]);
 
   const onChange = (pageCount: number): void => {
     setPage(pageCount);

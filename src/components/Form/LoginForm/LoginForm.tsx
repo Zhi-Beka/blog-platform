@@ -3,42 +3,35 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import style from './LoginForm.module.scss';
 import { LoginType } from '../../../types/userTypes';
-import { loginUser } from '../../../store/action-creators/authUsers';
-import { useEffect } from 'react';
+import { loginUser } from '../../../store/thunks/AuthThunk/authUsers';
 import { toast } from 'react-toastify';
 
 const LoginForm = () => {
-  const { error, loading, success, userInfo, message } = useAppSelector((state) => state.authReducer);
+  const { isError, loading } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = (data: LoginType) => {
+  const handleLogin = async (data: LoginType) => {
     const { email, password } = data;
-
     const userData = { user: { email, password } };
-    dispatch(loginUser(userData));
-  };
-  useEffect(() => {
-    if (error) {
-      toast.error(message);
-    }
-    if (success || userInfo) {
+    const res = await dispatch(loginUser(userData));
+    if (res.type.endsWith('fulfilled')) {
       toast.success('Successfully logined!');
       setTimeout(() => {
         navigate('/');
-      }, 1000);
+      }, 500);
     }
-  }, [userInfo, error, success, message, dispatch, navigate]);
+  };
 
   return (
     <div className={style.form}>
-      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSubmit}>
+      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={handleLogin}>
         <h2 className={style.title}>Sign In</h2>
 
         <span className={style.label}> Email address</span>
         <Form.Item
           name='email'
-          //initialValue={error && data[1]}
+          initialValue={isError}
           rules={[{ required: true, message: 'Please input correct email!', type: 'email' }]}
           style={{ marginBottom: '12', height: '40px' }}
         >
@@ -56,7 +49,7 @@ const LoginForm = () => {
         <Form.Item>
           <Button
             type='primary'
-            disabled={status === 'loading'}
+            disabled={loading}
             htmlType='submit'
             className='login-form-button'
             style={{ width: '100%', height: '40px', background: ' #1890FF', marginTop: '20px' }}

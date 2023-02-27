@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 import { createSlice } from '@reduxjs/toolkit';
-import { IState } from '../types';
-import { fetchUsers } from '../action-creators/fetchUsers';
+import { fetchUsers } from '../../thunks/UsersThunk/fetchUsers';
+import { IState } from './user-types';
 
 const initialState: IState = {
   loading: true,
@@ -11,7 +11,7 @@ const initialState: IState = {
 };
 
 export const UserSlice = createSlice({
-  name: 'user',
+  name: 'users/articles',
   initialState,
   reducers: {},
   extraReducers: {

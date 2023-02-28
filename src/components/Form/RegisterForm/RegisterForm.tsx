@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { FC, useEffect } from 'react';
 import { IData } from '../../../types/userTypes';
 import { signUpUser } from '../../../store/thunks/AuthThunk/authUsers';
+import Spinner from '../../Spinner/Spinner';
 
 const RegisterForm: FC = () => {
   const { isError, loading, user } = useAppSelector((state) => state.authReducer);
@@ -20,20 +21,14 @@ const RegisterForm: FC = () => {
   };
 
   useEffect(() => {
-    if (isError) toast.error(isError);
+    if (isError) toast.error(isError.errorMessage);
     if (user?.token) {
       toast.success('You are successfully registered');
       navigate('/');
     }
   }, [isError, user?.token]);
 
-  if (loading) {
-    return (
-      <Spin tip='Loading...'>
-        <Alert message='Alert message title' type='info' />
-      </Spin>
-    );
-  }
+  loading ? <Spinner /> : null;
   return (
     <div className={style.form}>
       <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSignUp}>

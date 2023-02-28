@@ -6,7 +6,7 @@ import { State } from './auth-types';
 const initialState: State = {
   loading: false,
   user: null,
-  isError: '',
+  isError: null,
 };
 
 const authSlice = createSlice({
@@ -17,7 +17,7 @@ const authSlice = createSlice({
       localStorage.removeItem('token');
       localStorage.removeItem('isLogged');
       state.loading = false;
-      state.isError = '';
+      state.isError = null;
       state.user = null;
     },
   },
@@ -25,7 +25,7 @@ const authSlice = createSlice({
     builder
       .addMatcher(isPending, (state) => {
         state.loading = true;
-        state.isError = '';
+        state.isError = null;
       })
       .addMatcher(isFulfilled, (state, action: PayloadAction<any>) => {
         state.user = action.payload.user;

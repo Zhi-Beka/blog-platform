@@ -5,6 +5,7 @@ import style from './LoginForm.module.scss';
 import { LoginType } from '../../../types/userTypes';
 import { loginUser } from '../../../store/thunks/AuthThunk/authUsers';
 import { toast } from 'react-toastify';
+import Spinner from '../../Spinner/Spinner';
 
 const LoginForm = () => {
   const { isError, loading } = useAppSelector((state) => state.authReducer);
@@ -21,7 +22,14 @@ const LoginForm = () => {
         navigate('/');
       }, 500);
     }
+    if (res.type.endsWith('rejected')) {
+      toast.error(isError?.errorMessage);
+    }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className={style.form}>

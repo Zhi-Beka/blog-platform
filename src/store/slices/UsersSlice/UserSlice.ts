@@ -4,7 +4,7 @@ import { fetchUsers } from '../../thunks/UsersThunk/fetchUsers';
 import { IState } from './user-types';
 
 const initialState: IState = {
-  loading: true,
+  loading: false,
   users: [],
   articleCount: 0,
   error: false,
@@ -26,6 +26,7 @@ export const UserSlice = createSlice({
     },
     [fetchUsers.rejected.type]: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
+      state.loading = false;
     },
   },
 });

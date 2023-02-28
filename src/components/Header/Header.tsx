@@ -26,6 +26,7 @@ const Header = () => {
       navigate('/');
     }, 500);
   };
+  const createArticleBtn = <Link to='new-article'>Create article</Link>;
 
   return (
     <header className={style.header}>
@@ -34,7 +35,7 @@ const Header = () => {
       </Link>
       <div className={style.header__link}>
         <Link to={login ? 'new' : 'sign-in'} className={active}>
-          {login ? 'Create article' : 'Sign In'}
+          {login ? createArticleBtn : 'Sign In'}
         </Link>
 
         {login && (

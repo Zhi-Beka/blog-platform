@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import { Article, ArticleList, ErrorPage, LoginForm, ProfileForm, RegisterForm } from '../components';
+import { Article, ArticleList, ErrorPage, LoginForm, ProfileForm, RegisterForm, NewArticlePost } from '../components';
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <ProfileForm />,
+      },
+      {
+        path: 'new-article',
+        element: <NewArticlePost />,
       },
     ],
   },

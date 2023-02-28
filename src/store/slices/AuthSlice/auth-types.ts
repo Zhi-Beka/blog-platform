@@ -15,7 +15,12 @@ export interface UserResponse {
 export interface State {
   loading: boolean;
   user: User | null;
-  isError: string;
+  isError: {
+    errorMessage: string;
+    errors?: {
+      'email or password': string;
+    };
+  } | null;
 }
 
 export interface ISignUp {

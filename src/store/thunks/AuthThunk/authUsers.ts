@@ -10,7 +10,7 @@ function generalThunkCreator(name: string, request: RequestType, error: string):
     async (data, thunkAPI): Promise<any> => {
       try {
         const res = await request(data);
-        console.log(res, 'thunk');
+
         return res.data;
       } catch (err: any) {
         const message = {

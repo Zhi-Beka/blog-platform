@@ -25,6 +25,13 @@ const Card = (props: IUser) => {
     </div>
   );
 
+  const editBtn = articleCard && (
+    <div className={style.editBox}>
+      <button>delete</button>
+      <button>edit</button>
+    </div>
+  );
+
   return (
     <div className={style.card}>
       <div className={style.header}>
@@ -53,7 +60,11 @@ const Card = (props: IUser) => {
           </div>
         </div>
       </div>
-      <p className={descriptionStyle}>{description}</p>
+      <span className={descriptionStyle}>
+        {description}
+
+        {editBtn}
+      </span>
       <p className={style.content}>{articleBody}</p>
     </div>
   );

@@ -62,6 +62,26 @@
     }
   }
 
+  .editBox {
+    display: flex;
+    gap: 10px;
+    height: 30px;
+    button {
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 5px;
+      width: 75px;
+      text-transform: capitalize;
+    }
+
+    :last-child {
+      color: var(--success-color);
+    }
+    :first-child {
+      color: red;
+    }
+  }
+
   .tags {
     display: flex;
     gap: 10px;
@@ -87,6 +107,8 @@
   }
   .articleFull {
     color: grey;
+    display: flex;
+    justify-content: space-between;
   }
 
   .body {

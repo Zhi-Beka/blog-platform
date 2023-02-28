@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <header className={style.header}>
       <Link to='/articles'>
-        <p>RealWorld Blog</p>
+        <h2>RealWorld Blog</h2>
       </Link>
       <div className={style.header__link}>
         <Link to={login ? 'new' : 'sign-in'} className={active}>

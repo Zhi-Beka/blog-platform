@@ -7,7 +7,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     //for debugging
-    console.info(`[request] [${JSON.stringify(config)}]`);
+    //console.info(`[request] [${JSON.stringify(config)}]`);
 
     ///
 

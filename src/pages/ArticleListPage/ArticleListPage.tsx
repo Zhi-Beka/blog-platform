@@ -1,11 +1,11 @@
 import { Pagination } from 'antd';
 import { useEffect, useState } from 'react';
-import Card from '../Card';
-import style from './ArticleList.module.scss';
+import Card from '../../components/Card';
+import style from './ArticleListPage.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUsers } from '../../store/thunks/UsersThunk/fetchUsers';
+import { fetchUsers } from '../../store/thunks/fetchUsers';
 
-const ArticleList = () => {
+const ArticleListPage = () => {
   const users = useAppSelector((state) => state.userReducer.users);
   const countPage = useAppSelector((state) => state.userReducer.articleCount);
 
@@ -47,4 +47,4 @@ const ArticleList = () => {
   );
 };
 
-export default ArticleList;
+export default ArticleListPage;

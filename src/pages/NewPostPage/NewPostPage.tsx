@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import Post from '../Post';
-import style from './NewArticlePost.module.scss';
+import Post from '../../components/Post';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { postNewArticle } from '../../store/thunks/PostThunk/PostThunk';
+import { postNewArticle } from '../../store/thunks/PostThunk';
 import { toast } from 'react-toastify';
 
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner';
 
 type ValuesType = {
   title: string;
@@ -15,7 +14,7 @@ type ValuesType = {
   text: string;
 };
 
-const NewArticlePost: FC = () => {
+const NewPostPage: FC = () => {
   const dispatch = useAppDispatch();
   const { loading, error } = useAppSelector((state) => state.postReducer);
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ const NewArticlePost: FC = () => {
   if (loading) {
     return <Spinner />;
   }
-  return <Post handleSubmit={handleNewPost} />;
+  return <Post handleSubmit={handleNewPost} post={undefined} />;
 };
 
-export default NewArticlePost;
+export default NewPostPage;

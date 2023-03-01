@@ -1,4 +1,4 @@
-import { LogInRequest, NewUserRequest } from '../store/slices/AuthSlice/auth-types';
+import { LogInRequest, NewUserRequest } from '../types/auth-types';
 import axios from './axios';
 
 const endpoints = {

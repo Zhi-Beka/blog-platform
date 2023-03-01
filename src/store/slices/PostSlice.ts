@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPostState } from '../../../types/postTypes';
+import { IPostState } from '../../types/postTypes';
 
 const initialState: IPostState = {
   loading: false,

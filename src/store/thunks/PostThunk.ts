@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IPostResponse, PostRequestType } from '../../../types/postTypes';
-import api from '../../../api';
+import { IPostResponse, PostRequestType } from '../../types/postTypes';
+import api from '../../api';
 
 function postThunkCreator(name: string, request: PostRequestType, error: string): any {
   return createAsyncThunk<IPostResponse & { rejectValue: any }>(name, async (data, thunkAPI): Promise<any> => {
@@ -19,3 +19,9 @@ function postThunkCreator(name: string, request: PostRequestType, error: string)
 }
 
 export const postNewArticle = postThunkCreator('posts/new-article', api.post.createPost, 'Something went wrong');
+
+export const getArticleBySlug = postThunkCreator(
+  'posts/article',
+  api.post.getPost,
+  'There is no article that you are looking for',
+);

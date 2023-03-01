@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../../api';
-import { GeneralRequest, RequestType, UserResponse } from '../../slices/AuthSlice/auth-types';
+import api from '../../api';
+import { GeneralRequest, RequestType, UserResponse } from '../../types/auth-types';
 
 function generalThunkCreator(name: string, request: RequestType, error: string): any {
   return createAsyncThunk<UserResponse & GeneralRequest & { rejectValue: any }>(

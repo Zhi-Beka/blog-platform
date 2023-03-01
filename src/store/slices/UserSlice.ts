@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers } from '../../thunks/UsersThunk/fetchUsers';
-import { IState } from './user-types';
+import { fetchUsers } from '../thunks/fetchUsers';
+import { IState } from '../../types/user-types';
 
 const initialState: IState = {
   loading: false,

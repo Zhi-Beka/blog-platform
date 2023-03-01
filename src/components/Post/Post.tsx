@@ -1,50 +1,60 @@
 import { Button, Form, Input, Space } from 'antd';
 import style from './Post.module.scss';
 import { FC } from 'react';
+import { IPost } from '../../types/postTypes';
+import { useLocation } from 'react-router-dom';
+type PostType = {
+  article: IPost;
+};
 
 interface IProps {
-  handleSubmit: (values: any) => void;
+  handleSubmit?: (values: any) => void;
+  post?: any;
 }
 
 const Post: FC<IProps> = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, post } = props;
+  //const { slug } = post;
+  //const location = useLocation();
+  //const article = location.pathname.includes(slug);
 
   return (
     <div className={style.logform__wrapper}>
       <Form onFinish={handleSubmit}>
-        <h2 className={style['logform__title-create']}>Create new article</h2>
+        {/*title shoudl be dinamic*/}
+        <h2 className={style.title}>{post ? 'Edit article' : 'Create new article'}</h2>
 
-        <span className={style['logform__input-sign']}>Title</span>
+        <span className={style.label}>Title</span>
         <Form.Item
           name='title'
           rules={[{ required: true, message: 'Please input title' }]}
           style={{ marginBottom: '20px ' }}
-          //initialValue={aimArticle?.title}
+          initialValue={post?.title}
         >
           <Input maxLength={100} placeholder='Title' style={{ height: '40px' }} />
         </Form.Item>
 
-        <span className={style['logform__input-sign']}>Short description</span>
+        <span className={style.label}>Short description</span>
         <Form.Item
           name='description'
-          //initialValue={aimArticle?.description}
+          initialValue={post?.description}
           rules={[{ required: true, message: 'Please input short description' }]}
           style={{ marginBottom: '20px' }}
         >
           <Input maxLength={100} placeholder='Short description' style={{ height: '40px' }} />
         </Form.Item>
 
-        <span className={style['logform__input-sign']}>Text</span>
+        <span className={style.label}>Text</span>
         <Form.Item
           name='body'
-          //initialValue={aimArticle?.body}
+          initialValue={post?.body}
           rules={[{ required: true, message: 'Please input your article' }]}
           style={{ marginBottom: '20px' }}
         >
           <Input.TextArea maxLength={1000} placeholder='Text' style={{ height: '168px' }} />
         </Form.Item>
 
-        <span className={style['logform__input-sign']}>Tags</span>
+        <span className={style.label}>Tags</span>
 
         <Form.List name='tagList'>
           {(fields, { add, remove }) => (

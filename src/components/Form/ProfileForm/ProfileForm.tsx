@@ -1,31 +1,17 @@
 import { Button, Form, Input } from 'antd';
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { Profile } from '../../../store/slices/AuthSlice/auth-types';
-import { updateProfile } from '../../../store/thunks/AuthThunk/authUsers';
-
 import style from './ProfileForm.module.scss';
 
-const ProfileForm: FC = () => {
-  const dispatch = useAppDispatch();
-  const token = useAppSelector((state) => state.authReducer.user?.token);
-  const { loading } = useAppSelector((state) => state.authReducer);
-  const navigate = useNavigate();
-  const onFinish = async (values: any) => {
-    const res = await dispatch(updateProfile({ user: { ...values, token } }));
-    if (res.type.endsWith('fulfilled')) {
-      toast.success('Profile successfully udpated!');
-      setTimeout(() => {
-        navigate('/');
-      }, 500);
-    }
-  };
+interface IProps {
+  onSubmit: (values: any) => void;
+}
+
+const ProfileForm: FC<IProps> = (props) => {
+  const { onSubmit } = props;
+
   return (
     <div className={style.form}>
-      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onFinish}>
+      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSubmit}>
         <h2>Edit Profile</h2>
         <span className={style.label}> Username</span>
         <Form.Item
@@ -72,12 +58,12 @@ const ProfileForm: FC = () => {
         <Form.Item>
           <Button
             type='primary'
-            disabled={loading}
+            //disabled={loading}
             htmlType='submit'
             className='login-form-button'
             style={{ width: '100%', height: '40px', background: ' #1890FF' }}
           >
-            {loading ? <p>Loading...</p> : 'Save'}
+            Save
           </Button>
         </Form.Item>
       </Form>

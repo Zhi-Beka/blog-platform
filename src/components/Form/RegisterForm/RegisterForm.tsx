@@ -1,42 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Alert, Button, Checkbox, Form, Input, Spin } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { Link } from 'react-router-dom';
 import style from './RegisterForm.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { toast } from 'react-toastify';
-import { FC, useEffect } from 'react';
-import { IData } from '../../../types/userTypes';
-import { signUpUser } from '../../../store/thunks/AuthThunk/authUsers';
-import Spinner from '../../Spinner/Spinner';
+import { FC } from 'react';
 
-const RegisterForm: FC = () => {
-  const { isError, loading, user } = useAppSelector((state) => state.authReducer);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+interface IProps {
+  onSubmit: (values: any) => void;
+}
 
-  const onSignUp = (data: IData) => {
-    const { username, email, password } = data;
-    const userData = { user: { username, email, password } };
-    dispatch(signUpUser(userData));
-  };
+const RegisterForm: FC<IProps> = (props) => {
+  const { onSubmit } = props;
 
-  useEffect(() => {
-    if (isError) toast.error(isError.errorMessage);
-    if (user?.token) {
-      toast.success('You are successfully registered');
-      navigate('/');
-    }
-  }, [isError, user?.token]);
-
-  loading ? <Spinner /> : null;
   return (
     <div className={style.form}>
-      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSignUp}>
+      <Form name='normal_login' className='login-form' initialValues={{ remember: true }} onFinish={onSubmit}>
         <h2>Create new account</h2>
         <span className={style.label}> Username</span>
         <Form.Item
           name='username'
-          //initialValue={error}
           rules={[
             {
               required: true,
@@ -106,7 +87,6 @@ const RegisterForm: FC = () => {
         <Form.Item>
           <Button
             type='primary'
-            disabled={loading}
             htmlType='submit'
             className='login-form-button'
             style={{ width: '100%', height: '40px', background: ' #1890FF' }}

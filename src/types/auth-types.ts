@@ -1,4 +1,4 @@
-import api from '../../../api';
+import api from '../api';
 
 /////>>>STATE AUTH<<</////
 export type User = {
@@ -89,3 +89,13 @@ export type SignUp = typeof api.user.signup;
 export type Login = typeof api.user.login;
 export type UpdateProfile = typeof api.user.updateProfile;
 export type RequestType = SignUp | Login | UpdateProfile;
+
+export interface IData {
+  username: string;
+  email: string;
+  password: string;
+  confirm: string;
+  remember: boolean;
+}
+
+export type LoginType = Pick<IData, 'email' | 'password'>;

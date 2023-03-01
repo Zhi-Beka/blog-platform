@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import style from './Article.module.scss';
-import Card from '../Card';
-import { IUser } from '../../types/userTypes';
+import style from './ArticlePage.module.scss';
+import Card from '../../components/Card';
+import { IUser } from '../../types/user-types';
 
-const Article: FC = () => {
+const ArticlePage: FC = () => {
   const { id } = useParams();
 
   const [user, setUser] = useState<IUser | null>(null);
@@ -33,4 +33,4 @@ const Article: FC = () => {
   );
 };
 
-export default Article;
+export default ArticlePage;

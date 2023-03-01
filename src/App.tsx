@@ -1,15 +1,14 @@
-import { Outlet } from 'react-router-dom';
-import Header from './components/Header';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { getCurrentUser } from './store/thunks/AuthThunk/authUsers';
-import Spinner from './components/Spinner/Spinner';
+import { useAppDispatch } from './hooks/redux';
+import { getCurrentUser } from './store/thunks/authUsers';
+import RootRouter from './routes/RootRouter';
 
 function App() {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector((state) => state.userReducer.loading);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -17,18 +16,9 @@ function App() {
     }
   }, [dispatch]);
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <>
-      <div className='app'>
-        <Header />
-        <>
-          <Outlet />
-        </>
-      </div>
+      <RootRouter />
       <ToastContainer />
     </>
   );

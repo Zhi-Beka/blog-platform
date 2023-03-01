@@ -1,0 +1,30 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.active {
+  border: 1px solid var(--success-color);
+  color: var(--success-color);
+  padding: 5px 8px;
+  border-radius: 5px;
+}
+
+.logOut {
+  color: var(--text-color);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--text-color);
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
+}

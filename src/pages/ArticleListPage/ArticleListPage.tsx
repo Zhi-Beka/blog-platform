@@ -41,7 +41,14 @@ const ArticleListPage = () => {
           );
         })}
 
-        <Pagination current={page} total={countPage} pageSize={5} onChange={onChange} showSizeChanger={false} />
+        <Pagination
+          current={page}
+          total={countPage}
+          pageSize={5}
+          onChange={onChange}
+          showSizeChanger={false}
+          style={{ marginBottom: '20px' }}
+        />
       </div>
     </>
   );

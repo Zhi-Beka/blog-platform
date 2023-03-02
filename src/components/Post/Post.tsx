@@ -3,9 +3,6 @@ import style from './Post.module.scss';
 import { FC } from 'react';
 import { IPost } from '../../types/postTypes';
 import { useLocation } from 'react-router-dom';
-type PostType = {
-  article: IPost;
-};
 
 interface IProps {
   handleSubmit?: (values: any) => void;
@@ -14,9 +11,6 @@ interface IProps {
 
 const Post: FC<IProps> = (props) => {
   const { handleSubmit, post } = props;
-  //const { slug } = post;
-  //const location = useLocation();
-  //const article = location.pathname.includes(slug);
 
   return (
     <div className={style.logform__wrapper}>

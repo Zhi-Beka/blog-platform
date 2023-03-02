@@ -1,13 +1,24 @@
 import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-//import { useAppDispatch } from '../../hooks/redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Post from '../../components/Post';
 import { IUser } from '../../types/user-types';
+import { updateArticleBySlug } from '../../store/thunks/PostThunk';
+import { toast } from 'react-toastify';
+
+type ValuesType = {
+  title: string;
+  tagList: string[];
+  description: string;
+  text: string;
+};
 
 const EditPostPage: FC = () => {
   const [post, setPost] = useState<IUser | null>(null);
-  const { id: slug } = useParams();
-  // const dispatch = useAppDispatch();
+  const { state: slug } = useLocation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { error } = useAppSelector((state) => state.postReducer);
 
   useEffect(() => {
     fetch(`https://blog.kata.academy/api/articles/${slug}`)
@@ -15,10 +26,18 @@ const EditPostPage: FC = () => {
       .then((data) => setPost(data.article));
   }, [slug]);
 
-  const handleEditPost = (values: any) => {
-    console.log(values);
+  const handleEditPost = async (values: ValuesType) => {
+    const res = await dispatch(updateArticleBySlug({ article: values, slug }));
+    if (res.type.endsWith('fulfilled')) {
+      toast.success('Article successfully updated !');
+      navigate('/');
+    }
+    if (res.type.endsWith('rejected')) {
+      toast.error(error?.errorMessage);
+    }
   };
-  return <>{post ? <Post handleSubmit={handleEditPost} post={post} /> : 'Please wait A MINUTE'}</>;
+
+  return post && <Post handleSubmit={handleEditPost} post={post} />;
 };
 
 export default EditPostPage;

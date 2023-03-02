@@ -7,7 +7,6 @@ interface RequireAuthProps {
 
 const RequireAuth: FC<RequireAuthProps> = ({ children }) => {
   const location = useLocation();
-  console.log(location);
   const isLogged = localStorage.getItem('isLogged');
 
   return isLogged ? children : <Navigate to='/sign-in' state={{ from: location }} />;

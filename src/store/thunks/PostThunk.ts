@@ -6,7 +6,7 @@ function postThunkCreator(name: string, request: PostRequestType, error: string)
   return createAsyncThunk<IPostResponse & { rejectValue: any }>(name, async (data, thunkAPI): Promise<any> => {
     try {
       const res = await request(data);
-      console.log(res, 'res');
+      console.log(res);
       return res.data;
     } catch (err: any) {
       const message = {
@@ -18,10 +18,33 @@ function postThunkCreator(name: string, request: PostRequestType, error: string)
   });
 }
 
-export const postNewArticle = postThunkCreator('posts/new-article', api.post.createPost, 'Something went wrong');
+export const postNewArticle = postThunkCreator(
+  'posts/new-article',
+  api.post.createPost,
+  'An error occurer during posting new article',
+);
 
 export const getArticleBySlug = postThunkCreator(
   'posts/article',
   api.post.getPost,
   'There is no article that you are looking for',
+);
+
+export const updateArticleBySlug = postThunkCreator(
+  'posts/update-article',
+  api.post.updatePost,
+  'An error occur, while update article',
+);
+
+export const deleteArticleBySlug = createAsyncThunk<string, string, { rejectValue: string }>(
+  'posts/delete',
+  async (slug, { rejectWithValue }): Promise<any> => {
+    try {
+      const response = await api.post.deletePost(slug);
+      console.log(response);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue('Произошла ошибка при удалeнии статьи');
+    }
+  },
 );

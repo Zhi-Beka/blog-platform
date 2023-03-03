@@ -40,7 +40,7 @@ export interface ErrorType {
 
 export interface IPostState {
   loading: boolean;
-  article: IPost[];
+  article: IPost | null;
   error: ErrorType | null;
 }
 

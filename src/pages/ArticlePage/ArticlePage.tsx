@@ -27,6 +27,7 @@ const ArticlePage: FC = () => {
           description={user.description}
           body={user.body}
           slug={user.slug}
+          favorited={user.favorited}
         />
       )}
     </div>

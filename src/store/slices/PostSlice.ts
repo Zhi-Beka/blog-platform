@@ -4,7 +4,7 @@ import { IPostState } from '../../types/postTypes';
 
 const initialState: IPostState = {
   loading: false,
-  article: [],
+  article: null,
   error: null,
 };
 

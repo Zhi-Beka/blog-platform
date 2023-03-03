@@ -24,7 +24,7 @@ const ArticleListPage = () => {
     <>
       <div className={style.list}>
         {users.map((item: any) => {
-          const { createdAt, author, tagList, title, favoritesCount, description, slug, body } = item;
+          const { createdAt, author, tagList, title, favoritesCount, description, slug, body, favorited } = item;
 
           return (
             <Card
@@ -37,6 +37,7 @@ const ArticleListPage = () => {
               description={description}
               slug={slug}
               body={body}
+              favorited={favorited}
             />
           );
         })}

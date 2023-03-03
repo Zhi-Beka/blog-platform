@@ -35,7 +35,7 @@ export interface IUser {
   body: string;
   createdAt: string;
   description: string;
-  favorited?: boolean;
+  favorited: boolean;
   favoritesCount: number;
   slug: string;
   tagList: string[];

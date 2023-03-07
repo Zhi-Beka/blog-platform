@@ -20,6 +20,8 @@ interface IError {
 
 export type LogIn = Record<'email' | 'password', string>;
 export type SignUp = Record<'email' | 'password' | 'username', string>;
+export type NewUser = Omit<IUser, 'bio' | 'image'>;
+export type Profile = Partial<IUser>;
 
 interface State<T, E> {
   loading: boolean;
@@ -32,51 +34,19 @@ export type AuthState = State<Auth, IError>;
 
 //responses
 
-export interface UserResponse {
-  user: IUser;
+interface IResponses<T> {
+  user: T;
 }
 
-export interface IUpdateUser {
-  user: UpdateProfile;
-}
-
-export interface INewUser {
-  user: NewUser;
-}
+export type UserResponse = IResponses<IUser>;
+export type IUpdateUser = IResponses<UpdateProfile>;
+export type INewUser = IResponses<NewUser>;
 
 ///>>>> THUNK AUTH <<<</////
 
-export type NewUser = {
-  username: string;
-  email: string;
-  token: string;
-  password?: string;
-};
-export type NewUserRequest = {
-  user: NewUser;
-};
-
-export type LoginUser = {
-  email: string;
-  password: string;
-};
-
-export type LogInRequest = {
-  user: LoginUser;
-};
-
-export type Profile = {
-  email?: string;
-  token?: string;
-  username?: string;
-  password?: string;
-  bio?: string;
-  image?: string;
-};
-
-export type UpdateProfileRequest = {
-  user: Profile;
-};
+export type NewUserRequest = IResponses<NewUser>;
+export type LogInRequest = IResponses<LogIn>;
+export type UpdateProfileRequest = IResponses<Profile>;
 
 export type GeneralRequest = UpdateProfileRequest & LogInRequest & NewUserRequest;
 
@@ -95,5 +65,4 @@ export interface IData {
 }
 
 export type LoginType = Pick<IData, 'email' | 'password'>;
-
 export type RegisterType = Pick<IData, 'email' | 'password' | 'username'>;

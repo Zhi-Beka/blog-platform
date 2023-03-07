@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import RegisterForm from '../../components/Form/RegisterForm/RegisterForm';
 import Spinner from '../../components/Spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { signUpUser } from '../../store/thunks/authUsers';
-import { IData, RegisterType } from '../../types/auth-types';
+import { RegisterType } from '../../types/auth-types';
 
 const RegisterPage = () => {
-  const { isError, loading } = useAppSelector((state) => state.authReducer);
+  const { loading } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

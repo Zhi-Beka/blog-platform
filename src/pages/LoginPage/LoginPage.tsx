@@ -29,7 +29,7 @@ const LoginPage = () => {
     return <Spinner />;
   }
 
-  return <LoginForm onSubmit={handleLogin} error={isError?.errorMessage} />;
+  return <LoginForm onSubmit={handleLogin} />;
 };
 
 export default LoginPage;

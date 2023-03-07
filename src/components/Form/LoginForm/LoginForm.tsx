@@ -6,10 +6,10 @@ import style from './LoginForm.module.scss';
 
 interface IProps {
   onSubmit: (values: LoginType) => void;
-  error: string | undefined;
+  error?: string | undefined;
 }
 const LoginForm = (props: IProps) => {
-  const { onSubmit, error } = props;
+  const { onSubmit } = props;
 
   return (
     <div className={style.form}>
@@ -19,7 +19,6 @@ const LoginForm = (props: IProps) => {
         <span className={style.label}> Email address</span>
         <Form.Item
           name='email'
-          initialValue={error}
           rules={[{ required: true, message: 'Please input correct email!', type: 'email' }]}
           style={{ marginBottom: '12', height: '40px' }}
         >

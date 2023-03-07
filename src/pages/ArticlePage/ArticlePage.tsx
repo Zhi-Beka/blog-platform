@@ -2,12 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import style from './ArticlePage.module.scss';
 import Card from '../../components/Card';
-import { IUser } from '../../types/user-types';
+import { IUsers } from '../../types/user-types';
 
 const ArticlePage: FC = () => {
   const { id } = useParams();
 
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUsers | null>(null);
 
   useEffect(() => {
     fetch(`https://blog.kata.academy/api/articles/${id}`)

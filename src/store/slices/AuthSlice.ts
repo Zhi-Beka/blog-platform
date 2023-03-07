@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthState } from '../../types/generic-types';
 
-import { State } from '../../types/auth-types';
-
-const initialState: State = {
+const initialState: AuthState = {
   loading: false,
   user: null,
   isError: null,

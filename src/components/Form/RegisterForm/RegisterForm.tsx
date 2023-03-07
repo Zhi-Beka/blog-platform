@@ -3,12 +3,13 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import style from './RegisterForm.module.scss';
 import { FC } from 'react';
+import { RegisterType } from '../../../types/auth-types';
 
 interface IProps {
-  onSubmit: (values: any) => void;
+  onSubmit: (values: RegisterType) => void;
 }
 
-const RegisterForm: FC<IProps> = (props) => {
+const RegisterForm = (props: IProps) => {
   const { onSubmit } = props;
 
   return (

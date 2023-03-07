@@ -1,41 +1,39 @@
 import api from '../api';
 
 /////>>>STATE AUTH<<</////
-export type User = {
+interface IUser {
   email: string;
   token: string;
   username: string;
   password?: string;
   bio?: string;
   image?: string;
-};
-export interface UserResponse {
-  user: User;
 }
-export interface State {
+
+interface IError {
+  errorMessage: string;
+  errors: {
+    'email or password': string;
+    username?: string;
+  };
+}
+
+export type LogIn = Record<'email' | 'password', string>;
+export type SignUp = Record<'email' | 'password' | 'username', string>;
+
+interface State<T, E> {
   loading: boolean;
-  user: User | null;
-  isError: {
-    errorMessage: string;
-    errors?: {
-      'email or password': string;
-    };
-  } | null;
+  isError: E | null;
+  user: T | null;
 }
 
-export interface ISignUp {
-  user: {
-    username: string;
-    email: string;
-    password: string;
-  };
-}
+type Auth = IUser & SignUp & LogIn;
+export type AuthState = State<Auth, IError>;
 
-export interface ILogin {
-  user: {
-    email: string;
-    password: string;
-  };
+//responses
+
+export interface UserResponse {
+  user: IUser;
 }
 
 export interface IUpdateUser {
@@ -45,8 +43,6 @@ export interface IUpdateUser {
 export interface INewUser {
   user: NewUser;
 }
-
-export type AuthState = ISignUp | ILogin | IUpdateUser | INewUser;
 
 ///>>>> THUNK AUTH <<<</////
 
@@ -85,10 +81,10 @@ export type UpdateProfileRequest = {
 export type GeneralRequest = UpdateProfileRequest & LogInRequest & NewUserRequest;
 
 // types of endpoints
-export type SignUp = typeof api.user.signup;
+export type Sign = typeof api.user.signup;
 export type Login = typeof api.user.login;
 export type UpdateProfile = typeof api.user.updateProfile;
-export type RequestType = SignUp | Login | UpdateProfile;
+export type RequestType = Sign | Login | UpdateProfile;
 
 export interface IData {
   username: string;
@@ -99,3 +95,5 @@ export interface IData {
 }
 
 export type LoginType = Pick<IData, 'email' | 'password'>;
+
+export type RegisterType = Pick<IData, 'email' | 'password' | 'username'>;

@@ -6,13 +6,13 @@ import { format } from 'date-fns';
 import { Button, message, Popconfirm } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import classNames from 'classnames';
-import { IUser } from '../../types/user-types';
+import { IUsers } from '../../types/user-types';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteArticleBySlug, deleteLikeBySlug, likePostBySlug } from '../../store/thunks/PostThunk';
 import { useState } from 'react';
 
-const Card = (props: IUser) => {
+const Card = (props: IUsers) => {
   const { createdAt, author, tagList, title, favoritesCount, description, slug, body, favorited } = props;
   const [liked, setLiked] = useState(favorited);
   const [likes, setLikes] = useState(favoritesCount);

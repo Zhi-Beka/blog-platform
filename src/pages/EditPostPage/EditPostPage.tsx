@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Post from '../../components/Post';
-import { IUser } from '../../types/user-types';
+import { IUsers } from '../../types/user-types';
 import { updateArticleBySlug } from '../../store/thunks/PostThunk';
 import { toast } from 'react-toastify';
 
@@ -14,7 +14,7 @@ type ValuesType = {
 };
 
 const EditPostPage: FC = () => {
-  const [post, setPost] = useState<IUser | null>(null);
+  const [post, setPost] = useState<IUsers | null>(null);
   const { state: slug } = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Pagination } from 'antd';
 import { useEffect, useState } from 'react';
 import Card from '../../components/Card';
@@ -25,7 +26,6 @@ const ArticleListPage = () => {
       <div className={style.list}>
         {users.map((item: any) => {
           const { createdAt, author, tagList, title, favoritesCount, description, slug, body, favorited } = item;
-
           return (
             <Card
               key={slug}

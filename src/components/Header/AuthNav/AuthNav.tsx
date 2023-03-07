@@ -7,7 +7,8 @@ import { logOut } from '../../../store/slices/AuthSlice';
 import { toast } from 'react-toastify';
 
 const AuthNav: FC = () => {
-  const { user } = useAppSelector((state) => state.authReducer);
+  const user = useAppSelector((state) => state.authReducer.user);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -16,6 +17,10 @@ const AuthNav: FC = () => {
     toast.success('You are logged out');
     navigate('/');
   };
+  const onImageError: any = (e: any) => {
+    e.target.src = avatar;
+  };
+  const foto = user?.image ? user.image : avatar;
 
   return (
     <>
@@ -26,7 +31,7 @@ const AuthNav: FC = () => {
       <Link to='profile' className={style.profile}>
         {user?.username}
         <div className={style.image}>
-          <img src={user ? user.image : avatar} />
+          <img src={foto} alt='avatar' onError={onImageError} />
         </div>
       </Link>
 

@@ -8,13 +8,12 @@ const ArticlePage: FC = () => {
   const { id } = useParams();
 
   const [user, setUser] = useState<IUsers | null>(null);
-
   useEffect(() => {
     fetch(`https://blog.kata.academy/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => setUser(data.article));
+    console.log(user, 'fetching');
   }, [id]);
-
   return (
     <div className={style.list}>
       {user && (

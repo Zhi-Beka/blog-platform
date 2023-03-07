@@ -1,9 +1,8 @@
 import style from './Card.module.scss';
-import like from '../../assets/heart.png';
-import liked from '../../assets/liked.png';
+import avatar from '../../assets/avatar.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
-import { Button, message, Popconfirm } from 'antd';
+import { message, Popconfirm } from 'antd';
 import ReactMarkdown from 'react-markdown';
 import classNames from 'classnames';
 import { IUsers } from '../../types/user-types';
@@ -16,7 +15,9 @@ const Card = (props: IUsers) => {
   const { createdAt, author, tagList, title, favoritesCount, description, slug, body, favorited } = props;
   const [liked, setLiked] = useState(favorited);
   const [likes, setLikes] = useState(favoritesCount);
+
   const { user } = useAppSelector((state) => state.authReducer);
+
   const isOwnAuthor = author.username === user?.username;
   const location = useLocation();
   const navigate = useNavigate();
@@ -59,8 +60,7 @@ const Card = (props: IUsers) => {
       <button onClick={() => navigate(`/articles/${slug}/edit`, { state: slug })}>edit</button>
     </div>
   );
-  const isLogged = localStorage.getItem('isLogged');
-  const disable = isLogged ? false : true;
+  const disable = !user ? true : false;
   const handleLikeBtn = async () => {
     if (!liked) {
       const res = await dispatch(likePostBySlug(slug));
@@ -87,8 +87,12 @@ const Card = (props: IUsers) => {
 
   const likeStyle = classNames({
     [style.like]: true,
-    [style.liked]: liked,
+    [style.liked]: liked && user,
   });
+
+  const onImageError: any = (e: any) => {
+    e.target.src = avatar;
+  };
 
   return (
     <div className={style.wrapper}>
@@ -115,7 +119,7 @@ const Card = (props: IUsers) => {
             </div>
 
             <div className={style.avatarka}>
-              <img alt='avatar' src={author.image} />
+              <img alt='avatar' src={author.image ? author.image : avatar} onError={onImageError} />
             </div>
           </div>
         </div>

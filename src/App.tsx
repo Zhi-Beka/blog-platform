@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { useAppDispatch } from './hooks/redux';
 import { getCurrentUser } from './store/thunks/authUsers';
-//import RootRouter from './routes/RootRouter';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import RequireAuth from './hoc/RequireAuth';

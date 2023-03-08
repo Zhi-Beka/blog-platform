@@ -50,5 +50,4 @@ export interface IPostResponse {
 
 // types of endpoints
 export type NewPost = typeof api.post.createPost;
-
 export type PostRequestType = NewPost;

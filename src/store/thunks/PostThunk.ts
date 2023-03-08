@@ -44,15 +44,8 @@ export const deleteArticleBySlug = createAsyncThunk<string, string, { rejectValu
 
 export const likePostBySlug = postThunkCreator('posts/like', api.post.likePost, 'An error occured');
 
-export const deleteLikeBySlug = createAsyncThunk<string, string, { rejectValue: string }>(
-  'posts/delete',
-  async (slug, { rejectWithValue }): Promise<any> => {
-    try {
-      const response = await api.post.deleteLike(slug);
-      console.log(response);
-      return response.data;
-    } catch (e) {
-      return rejectWithValue('Произошла ошибка при удалeнии like');
-    }
-  },
+export const deleteLikeBySlug = postThunkCreator(
+  'posts/delet-like',
+  api.post.deleteLike,
+  'An error occured while deleting favorite post',
 );

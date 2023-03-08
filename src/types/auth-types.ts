@@ -1,6 +1,5 @@
 import api from '../api';
 
-/////>>>STATE AUTH<<</////
 interface IUser {
   email: string;
   token: string;

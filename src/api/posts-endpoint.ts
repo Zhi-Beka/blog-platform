@@ -1,4 +1,3 @@
-import { IPostResponse, NewPostRequest } from '../types/postTypes';
 import axios from './axios';
 
 const postEndpoints = {

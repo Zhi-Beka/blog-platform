@@ -15,9 +15,7 @@ const Card = (props: IUsers) => {
   const { createdAt, author, tagList, title, favoritesCount, description, slug, body, favorited } = props;
   const [liked, setLiked] = useState(favorited);
   const [likes, setLikes] = useState(favoritesCount);
-
   const { user } = useAppSelector((state) => state.authReducer);
-
   const isOwnAuthor = author.username === user?.username;
   const location = useLocation();
   const navigate = useNavigate();
@@ -61,6 +59,7 @@ const Card = (props: IUsers) => {
     </div>
   );
   const disable = !user ? true : false;
+
   const handleLikeBtn = async () => {
     if (!liked) {
       const res = await dispatch(likePostBySlug(slug));
@@ -84,7 +83,6 @@ const Card = (props: IUsers) => {
       }
     }
   };
-
   const likeStyle = classNames({
     [style.like]: true,
     [style.liked]: liked && user,

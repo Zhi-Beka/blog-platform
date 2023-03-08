@@ -1,7 +1,6 @@
 import { Button, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { LoginType } from '../../../types/auth-types';
-
 import style from './LoginForm.module.scss';
 
 interface IProps {

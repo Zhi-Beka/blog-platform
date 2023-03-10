@@ -56,7 +56,7 @@ const Card = (props: IUsers) => {
         <button> Delete</button>
       </Popconfirm>
 
-      <button onClick={() => navigate(`/articles/${slug}/edit`, { state: slug })}>edit</button>
+      <button onClick={() => navigate(`${article}/${slug}/edit`, { state: slug })}>edit</button>
     </div>
   );
   const disable = !user;

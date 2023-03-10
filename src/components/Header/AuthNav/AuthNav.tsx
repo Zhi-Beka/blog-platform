@@ -5,6 +5,7 @@ import style from './AuthNav.module.scss';
 import avatar from '../../../assets/avatar.png';
 import { logOut } from '../../../store/slices/AuthSlice';
 import { toast } from 'react-toastify';
+import { newArticle, profile } from '../../../routes/route-const';
 
 const AuthNav: FC = () => {
   const user = useAppSelector((state) => state.authReducer.user);
@@ -24,11 +25,11 @@ const AuthNav: FC = () => {
 
   return (
     <>
-      <Link to='new-article' className={style.active}>
+      <Link to={newArticle} className={style.active}>
         Create article
       </Link>
 
-      <Link to='profile' className={style.profile}>
+      <Link to={profile} className={style.profile}>
         {user?.username}
         <div className={style.image}>
           <img src={foto} alt='avatar' onError={onImageError} />

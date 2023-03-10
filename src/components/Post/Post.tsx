@@ -1,8 +1,6 @@
 import { Button, Form, Input, Space } from 'antd';
 import style from './Post.module.scss';
 import { FC } from 'react';
-import { IPost } from '../../types/postTypes';
-import { useLocation } from 'react-router-dom';
 
 interface IProps {
   handleSubmit?: (values: any) => void;
@@ -15,7 +13,6 @@ const Post: FC<IProps> = (props) => {
   return (
     <div className={style.logform__wrapper}>
       <Form onFinish={handleSubmit}>
-        {/*title shoudl be dinamic*/}
         <h2 className={style.title}>{post ? 'Edit article' : 'Create new article'}</h2>
 
         <span className={style.label}>Title</span>

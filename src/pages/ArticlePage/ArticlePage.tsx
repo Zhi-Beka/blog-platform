@@ -12,7 +12,6 @@ const ArticlePage: FC = () => {
     fetch(`https://blog.kata.academy/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => setUser(data.article));
-    console.log(user, 'fetching');
   }, [id]);
 
   return (

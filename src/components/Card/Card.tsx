@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteArticleBySlug, deleteLikeBySlug, likePostBySlug } from '../../store/thunks/PostThunk';
 import { useState } from 'react';
+import { article } from '../../routes/route-const';
 
 const Card = (props: IUsers) => {
   const { createdAt, author, tagList, title, favoritesCount, description, slug, body, favorited } = props;
@@ -58,7 +59,7 @@ const Card = (props: IUsers) => {
       <button onClick={() => navigate(`/articles/${slug}/edit`, { state: slug })}>edit</button>
     </div>
   );
-  const disable = !user ? true : false;
+  const disable = !user;
 
   const handleLikeBtn = async () => {
     if (!liked) {
@@ -88,7 +89,7 @@ const Card = (props: IUsers) => {
     [style.liked]: liked && user,
   });
 
-  const onImageError: any = (e: any) => {
+  const onImageError: React.ReactEventHandler<HTMLImageElement> = (e: any) => {
     e.target.src = avatar;
   };
 
@@ -96,10 +97,10 @@ const Card = (props: IUsers) => {
     <div className={style.wrapper}>
       <div className={style.card}>
         <div className={style.header}>
-          <div className={style.header__text}>
+          <div className={style.text}>
             <div className={style.top}>
               <>
-                <Link to={articleCard ? '/articles' : `/articles/${slug}`}>
+                <Link to={articleCard ? article : `${article}/${slug}`}>
                   <h2>{title}</h2>
                 </Link>
               </>

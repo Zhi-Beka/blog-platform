@@ -2,8 +2,8 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import style from './RegisterForm.module.scss';
-import { FC } from 'react';
 import { RegisterType } from '../../../types/auth-types';
+import { signIn } from '../../../routes/route-const';
 
 interface IProps {
   onSubmit: (values: RegisterType) => void;
@@ -97,7 +97,7 @@ const RegisterForm = (props: IProps) => {
         </Form.Item>
         <p>
           Already have an account?{' '}
-          <Link to={'/sign-in'} className={style.signin}>
+          <Link to={signIn} className={style.signin}>
             Sign In.
           </Link>
         </p>

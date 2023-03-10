@@ -1,5 +1,6 @@
 import { Button, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { signUp } from '../../../routes/route-const';
 import { LoginType } from '../../../types/auth-types';
 import style from './LoginForm.module.scss';
 
@@ -44,7 +45,7 @@ const LoginForm = (props: IProps) => {
         </Form.Item>
         <p>
           Do not have an account?{' '}
-          <Link to={'/sign-up'} className={style.signup}>
+          <Link to={signUp} className={style.signup}>
             Sign Up
           </Link>
         </p>

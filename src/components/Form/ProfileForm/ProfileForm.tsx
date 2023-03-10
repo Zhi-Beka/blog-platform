@@ -58,7 +58,6 @@ const ProfileForm: FC<IProps> = (props) => {
         <Form.Item>
           <Button
             type='primary'
-            //disabled={loading}
             htmlType='submit'
             className='login-form-button'
             style={{ width: '100%', height: '40px', background: ' #1890FF' }}

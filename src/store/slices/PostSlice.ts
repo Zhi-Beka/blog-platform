@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AnyAction, createSlice } from '@reduxjs/toolkit';
 import { IPostState } from '../../types/postTypes';
 
 const initialState: IPostState = {
@@ -17,11 +17,11 @@ export const PostSlice = createSlice({
       .addMatcher(isPending, (state) => {
         state.loading = true;
       })
-      .addMatcher(isFulfilled, (state, action: PayloadAction<any>) => {
+      .addMatcher(isFulfilled, (state, action) => {
         state.article = action.payload.article;
         state.loading = false;
       })
-      .addMatcher(isError, (state, action: PayloadAction<any>) => {
+      .addMatcher(isError, (state, action) => {
         state.error = action.payload;
         state.loading = false;
       });

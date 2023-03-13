@@ -1,19 +1,14 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AnyAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { IPostResponse, PostRequestType } from '../../types/postTypes';
 import api from '../../api';
 
 function postThunkCreator(name: string, request: PostRequestType, error: string): any {
-  return createAsyncThunk<IPostResponse & { rejectValue: any }>(name, async (data, thunkAPI): Promise<any> => {
-    try {
-      const res = await request(data);
-      return res.data;
-    } catch (err: any) {
-      const message = {
-        errorMessage: error,
-        errors: err.response.data.errors,
-      };
-      return thunkAPI.rejectWithValue(message);
+  return createAsyncThunk<IPostResponse, undefined, { rejectValue: string }>(name, async (data, thunkAPI) => {
+    const res = await request(data);
+    if (!res.data) {
+      return thunkAPI.rejectWithValue(error);
     }
+    return res.data;
   });
 }
 

@@ -33,7 +33,7 @@ export interface ErrorType {
   errors: {
     message: string;
     error?: {
-      status: any;
+      status: string | number;
     };
   };
 }
